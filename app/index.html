@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My AngularJS App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
+
+  <script src="https://maps.google.com/maps/api/js"></script>
+</head>
+<body>
+
+  <nav class="blue-custom" role="navigation">
+    <div class="nav-wrapper">
+      <div class="logo">
+        <a id="logo-container" routerLink="" class="brand-logo">Yauro</a>
+      </div>
+
+
+      <!-- Dropdown Structure -->
+      <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!">users</a></li>
+        <li><a href="#!">lists</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">Business Rules</a></li>
+        <li><a href="#!">Link to ETL</a></li>
+      </ul>
+
+      <ul class="right hide-on-med-and-down">
+        <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Admin</a></li>
+        <li><a href="#">Login</a></li>
+        <li><a href="#">Logout</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Admin</a></li>
+        <li><a href="#">Login</a></li>
+        <li><a href="#">Logout</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <br>
+  <div class="row">
+    <div class="col s3 border">
+        <div class="side_filter"ng-controller="View2Ctrl">
+          <div class="side_filter_item">
+      
+              <h6 class="side_filter_item_header">Service Type</h6>
+              <ul>
+                <li>
+                  <input type="radio"  name="servicetype" id="no-interest" checked="checked"onclick="window.location='#!/view2';"/>
+                  <label for="no-interest">Non Interest Income</label>
+                </li>
+                <li><input type="radio"  name="servicetype" id="interest""/>
+                  <label for="interest">Interest Income</label></li>
+                <li><input type="radio"  name="servicetype" id="expenses";"/>
+                  <label for="expenses">Interest Expenses</label>
+                </li>
+              </ul>
+            </div>
+            <div class="side_filter_item">
+                <h6 class="side_filter_item_header">Year</h6>
+                <ul>
+                  <li><input type="checkbox" class="filled-in" id="2017" ng-click="setYear(2017)" /><label for="2017">2017</label></li>
+                  <li><input type="checkbox" class="filled-in" id="2016" ng-click="setYear(2016)" /><label for="2016">2016</label></li>
+                  <li><input type="checkbox" class="filled-in" id="2015" ng-click="setYear(2015)" checked="checked" /><label for="2015">2015</label></li>
+                  <li><input type="checkbox" class="filled-in" id="2014" ng-click="setYear(2014)"  /><label for="2014">2014</label></li>
+                </ul>
+              </div>
+              <div class="side_filter_item">
+                  <h6 class="side_filter_item_header">Branch</h6>
+                  <ul class="sideFilterBranch">
+                    <li>
+                      <input id="branch_0" type="radio" value="" ng-click="setBranchIdDefault(0)" class="filled-in" name="branchlist" checked="checked"/
+                      >
+                      <label for="branch_0">All Branches</label>
+                    </li>
+                    <li ng-repeat="branch in branches">
+                      <input type="radio" value="" ng-click="setBranchId(this)" class="filled-in" ng-attr-id="branch_{{branch.id}}" name="branchlist" /
+                      >
+                      <label for="branch_{{branch.id}}">{{branch.branchname}}</label>
+                    </li>
+                  </ul>
+                </div>
+                <div class="side_filter_item">
+                    <h6 class="side_filter_item_header">View Type</h6>
+                    <ul>
+                      <li>
+                        <input type="radio" class="filled-in" name="viewtype" id="Charts" onclick="window.location='#!/view2';"/>
+                        <label for="Charts">Charts Computed Amount</label>
+                      </li>
+                      <li>
+                        <input type="radio" class="filled-in" name="viewtype" id="Variance" checked="checked"  onclick="window.location='#!/view1';"/>
+                        <label for="Variance">Charts Variance</label>
+                      </li>
+                      <li>
+                        <input type="radio" class="filled-in" name="viewtype" id="Maps"  onclick="window.location='#!/maps';"/>
+                        <label for="Maps">Maps</label>
+                      </li>
+                      <li>
+                        <input type="radio" class="filled-in" name="viewtype" id="Tables"  onclick="window.location='#!/accounts';"/>
+                        <label for="Tables">Tables</label>
+                      </li>
+                    </ul>
+                  </div>
+        </div>
+      
+      </div>
+      <div ng-view></div>
+  </div>
+
+  <!-- <ul class="menu">
+    <li><a href="#!/view1">view1</a></li>
+    <li><a href="#!/view2">view2</a></li>
+  </ul> -->
+
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+
+
+
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="app.js"></script>
+  <script src="view1/view1.js"></script>
+  <script src="view2/view2.js"></script>
+  <script src="accounts/accounts.js"></script>
+  <script src="maps/maps.js"></script>
+  <script src="menu/menu.js"></script>
+  <script src="menu/menuDirective.js"></script>
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="bower_components\chart.js\dist\Chart.min.js"></script>
+  <script src="bower_components\angular-chart.js\dist\angular-chart.min.js"></script>
+</body>
+</html>

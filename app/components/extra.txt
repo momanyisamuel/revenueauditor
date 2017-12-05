@@ -1,0 +1,105 @@
+// $scope.incomeData = {};
+// $scope.hideResults = true;
+//
+// function getIncomeData() {
+//   $scope.hideResults = true;
+//   $q.all({
+//     incomes: $http.get('http://localhost:8080/dashboard/app/dbconnect/select.jsp?node=selectlist&parentlistid=5'),
+//     graphs: $http.get('http://localhost:8080/dashboard/app/dbconnect/select.jsp?node=selectnoninterestincome&month=5&year=2015&glacc=&branchid=0&day=0')
+//   }).then(function(results) {
+//     console.log(results);
+//     $scope.incomes = results.incomes.data['data'];
+//     $scope.graphs = results.graphs.data['data'];
+//     $scope.hideResults = false;
+//   });
+// }
+
+// $interval(getIncomeData, 20, 3);
+
+
+
+function loadLineItemChart(data) {
+          console.log('drawchart')
+          var current     = '0'
+          var previous    = '0'
+          labels          = []
+          clientData      = []
+          deloitteData    = []
+          for (var i = 0; i < data.data.length; i++) {
+                              console.log("chart list:"+data.data[i].parentlistid)
+                              current = data.data[i].parentlistid;
+                              if((current != previous && i != 0) || data.data.length == i+1){
+                                  c = 'Chart_' + previous;
+                                  console.log('element id:'+c)
+                                  console.log('deloitte data length:'+deloitteData.length)
+                                  obj = document.getElementById(c);
+                                  cdata = clientData
+                                  ddata = deloitteData
+                                  ldata = labels
+                                  if(obj != null)
+                                  initialize(obj)
+                                  labels =[]
+                                  clientData = []
+                                  deloitteData = []
+              }
+              labels.push(data.data[i].month);
+              clientData.push(data.data[i].CBZAmount*exchangerate);
+              deloitteData.push(data.data[i].DeloitteAmount*exchangerate);
+              previous = current;
+          }
+      }
+
+
+
+      function initialize(obj) {
+              //$(".chart").hide()
+              loadLineChart(obj)
+}
+
+function loadLineChart(obj) {
+      var ctx = obj.getContext("2d")
+  var randomScalingFactor = function () { return Math.round(Math.random() * 100) };
+  var ChartData = {
+      labels: ldata,
+      datasets: [
+                    {
+                        label: "Deloitte",
+                        fillColor: "rgba(51,122,183,0.2)",
+                        strokeColor: "rgba(51,122,183,1)",
+                        pointColor: "rgba(51,122,183,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(51,122,183,1)",
+                        data: ddata
+                    },
+                    {
+                        label: "Client",
+                        fillColor: "rgba(221, 74, 56,0.2)",
+                        strokeColor: "rgba(221, 74, 56,1)",
+                        pointColor: "rgba(221, 74, 56,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(221, 74, 56,1)",
+                        data: cdata
+                    }
+      ]
+  }
+
+  console.log("draw chart")
+  new Chart(ctx).Line(ChartData)
+}
+data.forEach(function (item) {
+    var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(item.latitude, item.longitude),
+        animation: google.maps.Animation.Bounce,
+        map: map
+    });
+
+});
+
+$scope.loadData = function () {
+         var url = "json/branch.json";
+         return $http.get(url).then(function (response) {
+             return response.data;
+         });
+     };

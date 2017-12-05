@@ -1,0 +1,255 @@
+
+/* You can add global styles to this file, and also import other style files */
+
+
+body {
+  background-color: #fff;
+  color: #000;
+}
+.btn {
+  padding: 0 1rem;
+}
+.btn {
+  font-size: 12px;
+  text-transform: none;
+}
+.btn:hover, .btn-large:hover, .btn:focus, .btn-large:focus, .btn-floating:focus {
+    background-color: rgba(255,255,255,0.7);
+    color: #000;
+    border: 1px #1155cc solid;
+    box-shadow: none;
+}
+.blue-custom {
+  background-color: #1155cc;
+}
+.logo {
+  margin-left: 12px;
+}
+.noshadow {
+  -webkit-box-shadow: none;
+-moz-box-shadow: none;
+box-shadow: none;
+}
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+  color: #1155cc;
+  font-size: 14px;
+}
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
+  color: #1155cc;
+}
+.collapsible{
+  border-top: none;
+  border-left: none;
+}
+
+.side_filter_item_header {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.border-right {
+  border-right: 1.5px #1155cc solid;
+}
+.border {
+  border-right: 1.5px #1155cc solid;
+}
+.side_filter_item {
+    border-bottom: 1.5px #1155cc solid;
+}
+.divider{
+  background-color: #1155cc;
+  height: 2px
+}
+.chart_totals {
+  border-top: none;
+  padding: 10px 16px;
+}
+.chart_totals a {
+  text-transform: uppercase;
+  color: #1155cc;
+}
+.chart_totals span {
+  display: block;
+  font-size: 10px;
+  text-align: right;
+}
+
+.chart_totals ul li {
+  display: inline-block;
+  margin: 0 7px;
+  padding: 0;
+}
+.chart_totals ul {
+  margin: 0;
+  padding: 0;
+}
+label {
+  color: #000;
+  font-weight: 300;
+}
+canvas {
+  border: 1px #1155cc solid;
+  width: 255px;
+  height: 145px;
+  padding: 10px;
+}
+.chart-item {
+  padding: 10px;
+}
+
+.chart_header {
+  width: 100%
+}
+
+.chart_title {
+  width: 50%;
+  float: left;
+}
+.chart_drill {
+  width: 50%;
+  float: left;
+  margin: 7px 0;
+  text-align: right;
+  color: #1155cc;
+}
+.mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label, .mat-accent .mat-slider-track-fill {
+    background-color: #1155cc;
+}
+.graphdynamic {
+  margin-top: 5px;
+}
+
+[type="checkbox"].filled-in:not(:checked)+label:after {
+  border: 2px #1155cc solid;
+}
+[type="radio"]:not(:checked)+label:before, [type="radio"]:not(:checked)+label:after, [type="radio"]:checked+label:before, [type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:before, [type="radio"].with-gap:checked+label:after {
+     border-radius: 0;
+     border: 2px #1155cc solid;
+}
+[type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:after {
+    background-color: #1155cc;
+    border: 2px solid #1155cc;
+}
+[type="checkbox"].filled-in:checked+label:after {
+  border: 2px solid #1155cc;
+  background-color: #1155cc;
+}
+
+menu.ng-isolate-scope {
+  padding: 0;
+}
+
+.slider {
+  width: 100%;
+  height: 48px;
+}
+
+/* track */
+input[type="range"] {
+  -webkit-appearance: none !important;
+  width: 100%;
+  height: 1px;
+  background-color: #1155cc;
+  border: none;
+  border-radius: 10px;
+  margin: auto;
+  transition: all 400ms;
+  outline:none;
+  padding: 0;
+  margin: 0;
+}
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 1px;
+  background-color: #1155cc;
+  border: none;
+  border-radius: 10px;
+  margin: auto;
+  transition: all 400ms;
+  outline:none;
+  padding: 0;
+  margin: 0;
+}
+
+/* thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  transform:scale(0.75);
+  border: none;
+  background-color: #1155cc;
+  border-radius: 40px;
+  box-shadow: 0px 0px 0px green;
+  transition: all 400ms;
+  outline:none
+}
+input[type="range"]::-moz-range-thumb {
+  -webkit-appearance: none !important;
+  transform:scale(0.75);
+  border: none;
+  background-color: #1155cc;
+  border-radius: 30px;
+  box-shadow: 0px 0px 0px green;
+  transition: all 400ms;
+  outline:none
+}
+
+/* thumb hover */
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform:scale(0.85);
+}
+input[type="range"]::-moz-range-thumb:hover{
+  transform:scale(0.85);
+}
+
+/* thumb active */
+input[type="range"]::-webkit-slider-thumb:active {
+  transform:scale(1);
+}
+input[type="range"]::-moz-range-thumb:active{
+  transform:scale(1);
+}
+#rangevalue {
+  text-align: center;
+  font-family: "Quantico", sans-serif;
+  font-size: 18px;
+  display: block;
+  margin: auto;
+  padding: 10px 0px;
+  width: 100%;
+  color: #1155cc;
+}
+.sideFilterBranch {
+    overflow: auto;
+    height: 140px;
+}
+.spinner {
+     background-color: #fff;
+     position: fixed;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     text-align:center;
+     z-index: 1000;
+     opacity: 0.5;
+     filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+}
+
+.spinner span {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  margin-left: -61px; /* -1 * image width / 2 */
+  margin-top: -32px;  /* -1 * image height / 2 */
+  display: block;
+}
+
+.ajax-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -32px; /* -1 * image width / 2 */
+    margin-top: -32px;  /* -1 * image height / 2 */
+    display: block;
+    width: 20px;
+    height: 20px;
+}
