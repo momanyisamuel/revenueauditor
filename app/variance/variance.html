@@ -1,0 +1,165 @@
+<div class="col s3 border" style="overflow: hidden;">
+  <div class="side_filter">
+    <div class="side_filter_item">
+
+        <h6 class="side_filter_item_header">Service Type</h6>
+        <ul>
+          <li>
+        		<input type="radio"  name="servicetype" id="no-interest" checked="checked"onclick="window.location='#!/computed';"/>
+        		<label for="no-interest">Non Interest Income</label>
+      		</li>
+          <li><input type="radio"  name="servicetype" id="interest""/>
+            <label for="interest">Interest Income</label></li>
+          <li><input type="radio"  name="servicetype" id="expenses";"/>
+            <label for="expenses">Interest Expenses</label>
+          </li>
+        </ul>
+      </div>
+      <div class="side_filter_item">
+          <h6 class="side_filter_item_header">Year</h6>
+          <ul>
+            <li><input type="checkbox" class="filled-in" id="2017" ng-click="setYear(2017)" /><label for="2017">2017</label></li>
+            <li><input type="checkbox" class="filled-in" id="2016" ng-click="setYear(2016)" /><label for="2016">2016</label></li>
+            <li><input type="checkbox" class="filled-in" id="2015" ng-click="setYear(2015)" checked="checked" /><label for="2015">2015</label></li>
+            <li><input type="checkbox" class="filled-in" id="2014" ng-click="setYear(2014)"  /><label for="2014">2014</label></li>
+          </ul>
+        </div>
+        <div class="side_filter_item">
+            <h6 class="side_filter_item_header">Branch</h6>
+            <ul class="sideFilterBranch">
+              <li>
+                <input id="branch_0" type="radio" value="" ng-click="setBranchIdDefault(0)" class="filled-in" name="branchlist" checked="checked"/
+                >
+                <label for="branch_0">All Branches</label>
+              </li>
+              <li ng-repeat="branch in branches">
+                <input type="radio" value="" ng-click="setBranchId(this)" class="filled-in" ng-attr-id="branch_{{branch.id}}" name="branchlist" /
+                >
+                <label for="branch_{{branch.id}}">{{branch.branchname}}</label>
+              </li>
+            </ul>
+          </div>
+          <div class="side_filter_item">
+              <h6 class="side_filter_item_header">View Type</h6>
+              <ul>
+                <li>
+                  <input type="radio" class="filled-in" name="viewtype" id="Charts" onclick="window.location='#!/computed';"/>
+                  <label for="Charts">Charts Computed Amount</label>
+                </li>
+                <li>
+                  <input type="radio" class="filled-in" name="viewtype" id="Variance" checked="checked"  onclick="window.location='#!/variance';"/>
+                  <label for="Variance">Charts Variance</label>
+                </li>
+                <li>
+                  <input type="radio" class="filled-in" name="viewtype" id="Maps"  onclick="window.location='#!/maps';"/>
+                  <label for="Maps">Maps</label>
+                </li>
+                <li>
+                  <input type="radio" class="filled-in" name="viewtype" id="Tables"  onclick="window.location='#!/accounts';"/
+                  ><label for="Tables">Tables</label>
+                </li>
+              </ul>
+            </div>
+  </div>
+
+</div>
+
+
+
+
+<div class=" col s9">
+  <div class="col s12">
+    <h5>Non Interest Income</h5>
+    <div>
+      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(1)" value=1>Jan</a>
+      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(2)" value=2>Feb</a>
+      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(3)" value=2>Mar</a>
+      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(4)" value=2>Apr</a>
+      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(5)" value=2>May</a>
+      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(6)" value=2>Jun</a>
+      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(7)" value=2>Jul</a>
+      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(8)" value=2>Aug</a>
+      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(9)" value=2>Sep</a>
+      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(10)" value=2>Oct</a>
+      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(11)" value=2>Nov</a>
+      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(12)" value=2>Dec</a>
+      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(0)" value=2>All</a>
+    </div>
+    <br>
+    <div class="divider"></div>
+  </div>
+
+
+  <div class="col s12">
+    <div class="graphdynamic">
+        <div class="row graphcard" >
+            <div class="spinner" ng-show="loading"><img class="ajax-loader"src="ajax-loader.gif" alt=""><span>Loading Data...</span> </div>
+            <div class="col s12 m4" ng-repeat="income in incomes track by income.account">
+              <div class="chart_body">
+                <div class="" style="padding:0;">
+                  <div class="chart_header">
+                    <h6 id="chart_{{income.account}}"class="chart_title">{{income.name}}</h6>
+                    <a class="chart_drill" href="#!/computed/{{income.id}}"><i class="tiny material-icons">view_list</i></a>
+                  </div>
+
+                  <div class="chart-item">
+                    <canvas id="graph_item_{{income.account}}"chart-click="onClick" ></canvas>
+                  </div>
+                </div>
+                <div class="chart_totals">
+                  <ul style="margin:0">
+                    <li><a href="#"><span id="client_amount_{{income.account}}" ></span><span>Bank Amount</span></a></li>
+                    <li><a href="#"><span  id="computed_amount_{{income.account}}"></span><span>Audit Amount</span></a></li>
+                    <li><a href="#"><span id="difference_total_{{income.account}}"></span><span>Variance</span></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="divider"></div>
+    <div class="graphstatic">
+      <div class="row">
+        <div class="row">
+          <br>
+            <div class="col s12 m8">
+              <div class="card noshadow">
+                <div class="card-content" style="padding:0;">
+                  <h6>Scatter Chart</h6>
+                    <canvas id="scatter_item" chart-click="onClick" style="height: 83px"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col s12 m4">
+              <div class="side_filter">
+                <div class="side_filter_item">
+                  <h6 class="side_filter_item_header">View Branch Exceptions On Google Maps</h6>
+                  <div id="map_canvas" style="width:100%;height:200px;"></div>
+                  <br>
+                  </div>
+                  <div class="side_filter_item">
+                      <h6 class="side_filter_item_header">View Options</h6>
+                      <ul>
+                          <li>
+                              <input type="radio" name=""class="filled-in" id="By Account" checked="checked" onclick="window.location='#!/accounts';"/>
+                              <label for="By Account">By Account</label>
+                          </li>
+                          <li>
+                              <input type="radio" name=""class="filled-in" id="By Branch"  onclick="window.location='#!/computed';"/>
+                              <label for="By Branch">By Branch</label>
+                          </li>
+                          <li>
+                              <input type="radio" name=""class="filled-in" id="By Map" onclick="window.location='#!/maps';"/>
+                              <label for="By Map">By Map</label>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
