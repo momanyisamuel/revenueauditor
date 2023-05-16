@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.menu', ['ngRoute'])
+angular.module('income.menu', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/menu', {

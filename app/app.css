@@ -5,7 +5,13 @@
 body {
   background-color: #fff;
   color: #000;
+  width: 100%;
+  display:flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
+
+
 .btn {
   padding: 0 1rem;
 }
@@ -19,11 +25,19 @@ body {
     border: 1px #1155cc solid;
     box-shadow: none;
 }
+
+a {
+  text-decoration: none;
+}
 .blue-custom {
   background-color: #1155cc;
+  border: 1px #1155cc solid;
 }
 .logo {
   margin-left: 12px;
+}
+nav .brand-logo {
+  font-size: 1.5rem;
 }
 .noshadow {
   -webkit-box-shadow: none;
@@ -42,16 +56,37 @@ box-shadow: none;
   border-left: none;
 }
 
-.side_filter_item_header {
-  padding-top: 2px;
-  padding-bottom: 2px;
+.wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  gap: o.5rem;
+}
+
+.inner-main-body {
+  display: flex;
+  position: relative;
+}
+
+.sidebar {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+  padding-left: 10px;
+  top: 65px;
+}
+.inner {
+  width: 80%;
+}
+.side_filter {
+  padding-right: 5px;
 }
 .border-right {
   border-right: 1.5px #1155cc solid;
 }
-.border {
-  border-right: 1.5px #1155cc solid;
-}
+
+
 .side_filter_item {
     border-bottom: 1.5px #1155cc solid;
 }
@@ -70,34 +105,58 @@ box-shadow: none;
 .chart_totals span {
   display: block;
   font-size: 10px;
-  text-align: right;
 }
 
 .chart_totals ul li {
   display: inline-block;
   margin: 0 7px;
   padding: 0;
+  flex: 1;
+  text-align: center;
+  border-left: 1.5px #1155cc solid;
 }
 .chart_totals ul {
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: row;
+  
+}
+.chart_totals ul li:nth-child(1) {
+  border-left: none;
 }
 label {
   color: #000;
   font-weight: 300;
 }
 canvas {
-  border: 1px #1155cc solid;
-  width: 255px;
+/*  border: 1px #1155cc solid;*/
+/*  width: 255px;
   height: 145px;
-  padding: 10px;
+  padding: 10px;*/
+}
+.row .col {
+  padding: 0 .15rem;
 }
 .chart-item {
   padding: 10px;
 }
 
+.chart_body {
+    border: 2px #1155cc solid;
+}
+
 .chart_header {
-  width: 100%
+    width: 100%;
+    background-color: #fff;
+    height: 32px;
+    color: #000;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.pagination li.active {
+    background-color: #1155cc;
 }
 
 .chart_title {
@@ -109,7 +168,10 @@ canvas {
   float: left;
   margin: 7px 0;
   text-align: right;
-  color: #1155cc;
+  color: #000;
+}
+.card.noshadow.scat.chart_body {
+  margin: 0;
 }
 .mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label, .mat-accent .mat-slider-track-fill {
     background-color: #1155cc;

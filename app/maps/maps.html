@@ -1,18 +1,16 @@
-<!-- <div class="col s3 border">
-  <div class="side_filter">
+<div class="sidebar">
+  <div class="side_filter border-right">
     <div class="side_filter_item">
 
         <h6 class="side_filter_item_header">Service Type</h6>
         <ul>
           <li>
-        		<input type="radio"  name="servicetype" id="no-interest" checked="checked"onclick="window.location='#/view2';"/>
-        		<label for="no-interest">Non Interest Income</label>
-      		</li>
-          <li>
-            <input type="radio"  name="servicetype" id="interest"/>
+            <input type="radio"  name="servicetype" id="no-interest" checked="checked"onclick="window.location='#!/computed';"/>
+            <label for="no-interest">Non Interest Income</label>
+          </li>
+          <li><input type="radio"  name="servicetype" id="interest""/>
             <label for="interest">Interest Income</label></li>
-          <li>
-            <input type="radio"  name="servicetype" id="expenses"/>
+          <li><input type="radio"  name="servicetype" id="expenses";"/>
             <label for="expenses">Interest Expenses</label>
           </li>
         </ul>
@@ -45,28 +43,28 @@
               <h6 class="side_filter_item_header">View Type</h6>
               <ul>
                 <li>
-                  <input type="radio" class="filled-in" name="viewtype" id="Charts" checked="checked" onclick="window.location='#!/view2';"/>
+                  <input type="radio" class="filled-in" name="viewtype" id="Charts" onclick="window.location='#!/computed';"/>
                   <label for="Charts">Charts Computed Amount</label>
                 </li>
                 <li>
-                  <input type="radio" class="filled-in" name="viewtype" id="variance" onclick="window.location='#!/view1';"/>
-                  <label for="variance">Charts Variance</label>
+                  <input type="radio" class="filled-in" name="viewtype" id="Variance" checked="checked"  onclick="window.location='#!/variance';"/>
+                  <label for="Variance">Charts Variance</label>
                 </li>
                 <li>
-                  <input type="radio" class="filled-in" name="viewtype" id="Maps"  onclick="window.location='#';"/>
+                  <input type="radio" class="filled-in" name="viewtype" id="Maps"  onclick="window.location='#!/maps';"/>
                   <label for="Maps">Maps</label>
                 </li>
                 <li>
-                  <input type="radio" class="filled-in" name="viewtype" id="Tables" onclick="window.location='#';"/
+                  <input type="radio" class="filled-in" name="viewtype" id="Tables"  onclick="window.location='#!/accounts';"/
                   ><label for="Tables">Tables</label>
                 </li>
               </ul>
             </div>
   </div>
 
-</div> -->
+</div>
 
-<div class="col s9">
+<div class="inner">
     <div class="col s12">
       <h5>{{income.name}}</h5>
       <div>

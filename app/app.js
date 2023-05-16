@@ -1,16 +1,15 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
+angular.module('income', [
   'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.accounts',
-  'myApp.maps',
-  'myApp.menu'
+  'income.variance',
+  'income.computed',
+  'income.accounts',
+  'income.maps'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
 
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  $routeProvider.otherwise({redirectTo: '/computed'});
 }]);

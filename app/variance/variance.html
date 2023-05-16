@@ -1,4 +1,4 @@
-<div class="col s3 border" style="overflow: hidden;">
+<div class="sidebar border" style="overflow: hidden;">
   <div class="side_filter">
     <div class="side_filter_item">
 
@@ -67,7 +67,7 @@
 
 
 
-<div class=" col s9">
+<div class="inner">
   <div class="col s12">
     <h5>Non Interest Income</h5>
     <div>
@@ -94,23 +94,23 @@
     <div class="graphdynamic">
         <div class="row graphcard" >
             <div class="spinner" ng-show="loading"><img class="ajax-loader"src="ajax-loader.gif" alt=""><span>Loading Data...</span> </div>
-            <div class="col s12 m4" ng-repeat="income in incomes track by income.account">
+            <div class="col s12 m4" ng-repeat="income in incomes track by income.typeid">
               <div class="chart_body">
                 <div class="" style="padding:0;">
                   <div class="chart_header">
-                    <h6 id="chart_{{income.account}}"class="chart_title">{{income.name}}</h6>
-                    <a class="chart_drill" href="#!/computed/{{income.id}}"><i class="tiny material-icons">view_list</i></a>
+                    <h6 id="chart_{{income.typeid}}"class="chart_title">{{income.AccountName}}</h6>
+                    <a class="chart_drill" href="#!/computed/{{income.typeid}}"><i class="tiny material-icons">view_list</i></a>
                   </div>
 
                   <div class="chart-item">
-                    <canvas id="graph_item_{{income.account}}"chart-click="onClick" ></canvas>
+                    <canvas id="graph_item_{{income.typeid}}"chart-click="onClick" *ngIf="" ></canvas>
                   </div>
                 </div>
                 <div class="chart_totals">
                   <ul style="margin:0">
-                    <li><a href="#"><span id="client_amount_{{income.account}}" ></span><span>Bank Amount</span></a></li>
-                    <li><a href="#"><span  id="computed_amount_{{income.account}}"></span><span>Audit Amount</span></a></li>
-                    <li><a href="#"><span id="difference_total_{{income.account}}"></span><span>Variance</span></a></li>
+                    <li><a href="#"><span id="client_amount_{{income.typeid}}" ></span><span>Bank Amount</span></a></li>
+                    <li><a href="#"><span  id="computed_amount_{{income.typeid}}"></span><span>Audit Amount</span></a></li>
+                    <li><a href="#"><span id="difference_total_{{income.typeid}}"></span><span>Variance</span></a></li>
                   </ul>
                 </div>
               </div>

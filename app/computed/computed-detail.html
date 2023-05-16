@@ -1,5 +1,5 @@
-<div class="col s3 border">
-  <div class="side_filter">
+<div class="sidebar">
+  <div class="side_filter border-right">
     <div class="side_filter_item">
 
         <h6 class="side_filter_item_header">Service Type</h6>
@@ -26,6 +26,9 @@
         </div>
         <div class="side_filter_item">
             <h6 class="side_filter_item_header">Branch</h6>
+            <ul>
+              <li ng-repeat="income in incomes"><input type="checkbox" class="filled-in" value="2" id="selecttwo" /><label for="selecttwo">{{income.AccountName}}</label></li>
+            </ul>
             <ul class="sideFilterBranch">
               <li>
                 <input id="branch_0" type="radio" value="" ng-click="setBranchIdDefault(0)" class="filled-in" name="branchlist" checked="checked"/
@@ -33,9 +36,9 @@
                 <label for="branch_0">All Branches</label>
               </li>
               <li ng-repeat="branch in branches">
-                <input type="radio" value="" ng-click="setBranchId(this)" class="filled-in" ng-attr-id="branch_{{branch.id}}" name="branchlist" /
+                <input type="radio" value="" ng-click="setBranchId(this)" class="filled-in" ng-attr-id="{{branch.acbranchid}}" name="branchlist" /
                 >
-                <label for="branch_{{branch.id}}">{{branch.branchname}}</label>
+                <label for="{{branch.acbranchid}}">{{branch.branchname}}</label>
               </li>
             </ul>
           </div>
@@ -64,25 +67,30 @@
 
 </div>
 
-<div class="col s9">
+<div class="inner">
   <div class="col s12">
-    <h5>{{income.name}}</h5>
-    <div>
-      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(1)" value=1>Jan</a>
-      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(2)" value=2>Feb</a>
-      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(3)" value=2>Mar</a>
-      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(4)" value=2>Apr</a>
-      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(5)" value=2>May</a>
-      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(6)" value=2>Jun</a>
-      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(7)" value=2>Jul</a>
-      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(8)" value=2>Aug</a>
-      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(9)" value=2>Sep</a>
-      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(10)" value=2>Oct</a>
-      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(11)" value=2>Nov</a>
-      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(12)" value=2>Dec</a>
-      <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(0)" value=2>All</a>
+        <div class="row">
+          <div class="col s3">
+            <h5>{{income.AccountName}}</h5>
+          </div>
+          <div class="col s9">
+            <div>
+              <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(1)" value=1>Jan</a>
+              <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(2)" value=2>Feb</a>
+              <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(3)" value=2>Mar</a>
+              <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(4)" value=2>Apr</a>
+              <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(5)" value=2>May</a>
+              <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(6)" value=2>Jun</a>
+              <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(7)" value=2>Jul</a>
+              <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(8)" value=2>Aug</a>
+              <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(9)" value=2>Sep</a>
+              <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(10)" value=2>Oct</a>
+              <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(11)" value=2>Nov</a>
+              <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(12)" value=2>Dec</a>
+              <a href=""class="waves-effect waves-light blue-custom btn" ng-click="setMonth(0)" value=2>All</a>
+            </div>
+          </div>
     </div>
-    <br>
     <div class="divider"></div>
   </div>
 
@@ -94,58 +102,76 @@
           <!-- view by map -->
           <div class="col s12 m8" >
             <div  ng-show="contentShow == 'first'">
-              <div class="card noshadow">
+              <div class="chart_body">
                 <div class="card-content" style="padding:0;">
-                  <h6 class="side_filter_item_header">View Account Exceptions By Branch </h6>
-                  <!-- <div class="">
-                          <h6 style="font-weight:500;">{{income.name}}</h6>
-                          <table class="table_{{income.account}} bordered" ng-table="incomeTable">
-                              <thead>
-                                <tr>
-                                    <th>Account</th>
-                                    <th>System Amount</th>
-                                    <th>Computed Amount</th>
-                                    <th>Variance</th>
-                                </tr>
-                              </thead>
-                      
-                              <tbody ng-repeat="table in tables">
-                                <tr>
-                                  <td></td>
-                                  <td>${{ table.computedamount }}</td>
-                                  <td>${{ table.systemamount }}</td>
-                                  <td>${{ table.variance }}</td>
-                                </tr>
-                              </tbody>
-
-                            </table> </div> -->
+                  <div class="chart_header">
+                    <h6 class="side_filter_item_header">View Account Exceptions By Branch </h6>
                   </div>
-              </div>
-            </div>
-            <div ng-show="contentShow == 'second'">
-                <div class="card noshadow">
-                    <div class="card-content" style="padding:0;">
-                    <h6 class="side_filter_item_header">View Branch Exceptions By Accounts</h6>
-                    <div class="">
-                        <h6 style="font-weight:500;">{{income.name}}</h6>
-                        <table class="table_{{income.account}} bordered" ng-table="incomeTable">
+                  <div class="">
+                          <table class="table_{{income.account}} bordered" si-table>
                             <thead>
                               <tr>
-                                  <th>Branch</th>
+                                  <th>Account</th>
                                   <th>System Amount</th>
                                   <th>Computed Amount</th>
                                   <th>Variance</th>
                               </tr>
                             </thead>
                     
-                            <tbody ng-repeat="table in tables">
-                              <tr>
-                                <td></td>
+                            <tbody si-sortable ng-repeat="table in tables">
+                              <tr >
+                                <td>{{table.AccountName}}</td>
                                 <td>${{ table.computedamount }}</td>
                                 <td>${{ table.systemamount }}</td>
                                 <td>${{ table.variance }}</td>
                               </tr>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <si-table-pagination limit="8" />
+                                    </td>
+                                </tr>
+                            </tfoot>
+
+                          </table>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div ng-show="contentShow == 'second'">
+                <div class="chart_body">
+                    <div class="card-content" style="padding:0;">
+                    
+                    <div class="chart_header">
+                      <h6 class="side_filter_item_header">View Branch Exceptions By Accounts</h6>
+                    </div>
+                    <div class="">
+                        <table class="table_{{income.account}} bordered" si-table>
+                            <thead>
+                              <tr>
+                                    <th>Branch</th>
+                                  <th>System Amount</th>
+                                  <th>Computed Amount</th>
+                                  <th>Variance</th>
+                              </tr>
+                            </thead>
+                    
+                            <tbody si-sortable ng-repeat="table in tables">
+                              <tr >
+                                <td>{{table.branchname}}</td>
+                                <td>${{ table.computedamount }}</td>
+                                <td>${{ table.systemamount }}</td>
+                                <td>${{ table.variance }}</td>
+                              </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <si-table-pagination limit="8" />
+                                    </td>
+                                </tr>
+                            </tfoot>
 
                           </table>
                         
@@ -156,10 +182,12 @@
           </div>
           <!-- view by account -->
           <div class="col s12 m4">
-            <div class="side_filter">
+            <div class="side_filter chart_body">
               <div class="side_filter_item">
-                <h6 class="side_filter_item_header">Tolerance Settings</h6>
-
+                <div class="chart_header">
+                  <h6 class="side_filter_item_header">Tolerance Settings</h6>
+                </div>
+                
                 <mat-form-field class="example-margin">
                   <input matInput type="number" placeholder="100">
                 </mat-form-field>

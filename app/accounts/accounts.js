@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.accounts', ['ngRoute','chart.js'])
+angular.module('income.accounts', ['ngRoute','chart.js'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/accounts', {

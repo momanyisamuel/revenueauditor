@@ -52,24 +52,66 @@ angular.module('income.variance', ['ngRoute','chart.js'])
       branchId = b;
       new chart;
     }
-    getData.getIncomeData().then(function (data) {
-          $scope.incomes = data.data['data'];
+    $http.get('http://localhost:8080/dashboard/app/json/chart.json').success(function (data) {
+
+          $scope.incomes = []
+          
+          console.log(data.data)
+          for (var i = 0; i < data.data.length; i++) {
+            console.log(data.data[i].AccountName)
+            $scope.incomes.push(data.data[i]);
+          }
+          
     });
 
-    $scope.contentShow = 'first';
+    $scope.contentShow = 'second';
     $http.get('http://localhost:8080/dashboard/app/dbconnect/select.jsp?'+
-    'node=selectlist&parentlistid=5').success(function(data){
-        console.log(data.data[0].account);
+    'node=selectrevenuetype&revenuetypeid=1').success(function(data){
     
         angular.forEach(data.data, function(item) {
-             if (item.id == $routeParams.incomeId){
+            console.log(item.typeid)
+             if (item.typeid == $routeParams.incomeId){
                $scope.income = item;
                console.log(item)
-               
              }
            });
-        //$scope.income = $filter('filter')(data.data[0].account);
-        loadMaps()
+        $http.get('http://localhost:8080/dashboard/app/dbconnect/select.jsp?'+
+        'node=selectnoninterestincomebranch'+
+        '&year=0'+
+        '&month=0'+
+        '&typeid=0'+
+        '&customerid=0'+
+        '&branchid='+branchId).then(function (d) {
+
+            var current = 0
+            $scope.tables = []
+            $scope.viewby = 5;
+            $scope.totalItems = d.data.data.length
+            $scope.currentpage = 4
+            $scope.itemsPerPage = $scope.viewby;
+            $scope.maxSize = 5;
+
+            console.log(d.data.data)
+            for (var i = 0; i < d.data.data.length; i++ ) {
+              current = d.data.data[i].typeid
+              if (current == $routeParams.incomeId) {
+                  //console.log(d.data.data[i])
+
+                  var tables = $scope.tables.push(d.data.data[i])
+                  $scope.incomeTable = new NgTableParams({page: 1,count: 5},{
+                    getData:function(params){
+                      $defer.resolve(tables.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                      params.total(tables.length);
+                    },
+                    total: d.data.data[i].length
+
+                  })
+                  //console.log($scope.tables)
+                  
+                  
+                }
+            }
+        })
     });
     
     $http.get('http://localhost:8080/dashboard/app/dbconnect/select.jsp?'+
@@ -131,7 +173,7 @@ angular.module('income.variance', ['ngRoute','chart.js'])
       objv.innerHTML = ((totald/1-totalc/1)/totald/1*100).toFixed(2).toString()+"%"
       loadScatterChart();
       loadMaps()
-      $scope.loading = false;
+      //$scope.loading = false;
     }
 
     //createmap
@@ -230,8 +272,13 @@ angular.module('income.variance', ['ngRoute','chart.js'])
 
     // function to loop through data and create object list
     var chart = function (){
-      $scope.loading = true;
-      getData.getChartData(month,year, branchId).then(function (d) {
+      //$scope.loading = true;
+      $http.get('http://localhost:8080/dashboard/app/dbconnect/select.jsp?'+
+        'node=selectnoninterestincomedate&'+
+        'year='+year+
+        '&month='+month+
+        '&branchid='+branchId+
+        '&customerid=0').success(function (d) {
           console.log(d)
           //var data = JSON.parse(d);
           //console.log(data);

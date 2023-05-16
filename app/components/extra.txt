@@ -103,3 +103,231 @@ $scope.loadData = function () {
              return response.data;
          });
      };
+
+
+initMaps()
+  
+  var citymap = {
+      Abia: {
+        center: {lat: 7.488378, lng: 5.523811},
+        variance: 2714856
+      },
+      Adamawa: {
+        center: {lat: 12.434454, lng: 9.624334},
+        population: 8405837
+      },
+      Jigawa: {
+        center: {lat: 9.573282, lng: 12.385991},
+        population: 3857799
+      },
+      Ogun: {
+        center: {lat: 3.372655, lng: 6.978382},
+        population: 603502
+      }
+  };
+  var map
+  function initMaps() {
+    map = new google.maps.Map(document.getElementById('maps'), {
+      zoom: 4,
+      center: {lat: 10.14193168613103, lng: 8.26171875}
+    });
+  }
+
+  for (var city in citymap) {
+      // Add the circle for this city to the map.
+      var cityCircle = new google.maps.Circle({
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35,
+        map: map,
+        center: citymap[city].center,
+        radius: Math.sqrt(citymap[city].population) * 100
+      });
+  }
+
+  http://localhost:8080/dashboard/app/dbconnect/select.jsp?node=selectnoninterestincomedate&month=0&branchid=0&customerid=0
+
+
+  if(request.getParameter("node").toString().equals("selectlist")){
+    //out.println(1);
+      String data="{\"data\":";
+      String SQL="exec banking_node_dw.dbo.selectlist "+
+      "  @parentlistid="+request.getParameter("parentlistid");
+      rs=stmt.executeQuery(SQL);
+      rsmd=rs.getMetaData();
+      int x=0;
+      while(rs.next()){
+        if(x>0) data=data+",{";
+        if(x==0) data=data+"[{";
+        for(int i=1;i<=rsmd.getColumnCount();i++){
+            if(i==1)data=data+"\""+ rsmd.getColumnName(i)+"\":\""+rs.getString(rsmd.getColumnName(i)) + "\"";
+            if(i>1)data=data+",\""+ rsmd.getColumnName(i)+"\":\""+rs.getString(rsmd.getColumnName(i)) + "\"";
+        }
+        data=data+"}";
+        x++;
+      }
+      data=data+"]}";
+      //out.println(SQL);
+      out.println(data);
+  }
+  if(request.getParameter("node").toString().equals("selectbranch")){
+    //out.println(1);
+      String data="{\"data\":";
+      String SQL="exec portal_node_dw.dbo.selectdimbranch "+
+      "  @branchid="+request.getParameter("branchid");
+      rs=stmt.executeQuery(SQL);
+      rsmd=rs.getMetaData();
+      int x=0;
+      while(rs.next()){
+        if(x>0) data=data+",{";
+        if(x==0) data=data+"[{";
+        for(int i=1;i<=rsmd.getColumnCount();i++){
+            if(i==1)data=data+"\""+ rsmd.getColumnName(i)+"\":\""+rs.getString(rsmd.getColumnName(i)) + "\"";
+            if(i>1)data=data+",\""+ rsmd.getColumnName(i)+"\":\""+rs.getString(rsmd.getColumnName(i)) + "\"";
+        }
+        data=data+"}";
+        x++;
+      }
+      data=data+"]}";
+      //out.println(SQL);
+      out.println(data);
+  }
+
+  $http.get('http://localhost:8080/dashboard/app/dbconnect/select.jsp?'+
+    'node=selectrevenuetype&revenuetypeid=1').success(function(data){
+        console.log(data.data[0]);
+        angular.forEach(data.data, function(item) {
+             if (item.account == $routeParams.incomeId){
+               $scope.income = item;
+               console.log(item) 
+             }
+             getData.getChartData(month,year, branchId).then(function (d) {
+              var current     = '0'
+              $scope.tables = []
+              $scope.viewby = 5;
+              $scope.totalItems = d.data.data.length
+              $scope.currentpage = 4
+              $scope.itemsPerPage = $scope.viewby;
+              $scope.maxSize = 5;
+
+              for (var i = 0; i < d.data.data.length; i++) {
+                //console.log('list: '+d.data.data[i].computedamount)
+                current = d.data.data[i].glacc
+                
+                if (current == $routeParams.incomeId) {
+                  //console.log(d.data.data[i])
+
+                  var tables = $scope.tables.push(d.data.data[i])
+                  $scope.incomeTable = new NgTableParams({page: 1,count: 5},{
+                    getData:function(params){
+                      $defer.resolve(tables.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                      params.total(tables.length);
+                    },
+                    total: d.data.data[i].length
+
+                  })
+                  //console.log($scope.tables)
+                  
+                  
+                }
+
+
+              }
+
+
+              
+             })
+
+           });
+        //$scope.income = $filter('filter')(data.data[0].account);
+        loadMaps()
+    });
+
+
+    // var currentRequest = jQuery.ajax({
+      //   url: 'http://localhost:8080/dashboard/app/dbconnect/select.jsp?'+
+      //   'node=selectnoninterestincomebranch'+
+      //   '&year=0'+year+
+      //   '&month=0'+month+
+      //   '&customerid=0'+
+      //   '&branchid='+branchId,
+      //   beforeSend: function () {
+      //     if(currentRequest != null) {
+      //       currentRequest.abort();
+      //     }
+      //   },
+      //   complete: function () {},
+      //   data: 'branchid='+branchId,
+      //   datatype: 'json',
+      //   success: function (response) {
+      //             //console.log(response)
+      //             var data = JSON.parse(response);
+      //             console.log(data.data)
+      //             var locations = [];
+      //             var infowindow = new
+      //             google.maps.InfoWindow();
+      //             var marker
+      //             var eventListener1
+      //             var eventListener2
+      //             var eventListener3
+      //             var mapData = []
+      //             var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+      //             function getImage(variance) {
+
+      //             }
+      //             for (var i = 0; i < data.data.length; i++) {
+
+      //               //console.log(data.data[i].latitude)
+                     
+      //               var circleIcon = {
+      //                   path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
+      //                   fillColor: '#FF0000',
+      //                   fillOpacity: .6,
+      //                   strokeWeight: 0,
+      //                   scale: 1
+      //               };
+      //               marker = new google.maps.Marker({
+      //                 position: new google.maps.LatLng(data.data[i].latitude, data.data[i].longitude),
+      //                 map: map,
+      //                 icon: image
+      //               });
+      //           eventListener1 = google.maps.event.addListener(marker, 'click', (function (marker, i) {
+      //               return function () {
+      //                   map.setZoom(12);
+      //                   map.setCenter(marker.getPosition());
+      //                   branchId= data.data[i].id
+      //                   //lineItems(hdnViewId.value);
+      //               }
+      //           })(marker, i));
+      //           eventListener2 = google.maps.event.addListener(marker, 'click', (function (marker, i) {
+      //               return function () {
+      //                   infowindow.setContent(data.data[i].desc);
+      //                   infowindow.open(map, marker);
+      //               }
+      //           })(marker, i));
+      //           eventListener3 = google.maps.event.addListener(infowindow, 'closeclick', (function (marker, i) {
+      //               map.setZoom(6);
+      //               map.setCenter(center);
+      //               branchId = 0
+      //               //lineItems(hdnViewId.value);
+      //           }));
+      //         }
+
+      //       //   for (var city in mData) {
+      //       //     // Add the circle for this city to the map.
+      //       //     //console.log(mData[city].city.center.lat)
+      //       //     var cityCircle = new google.maps.Circle({
+      //       //       strokeColor: '#FF0000',
+      //       //       strokeOpacity: 0.8,
+      //       //       strokeWeight: 2,
+      //       //       fillColor: '#FF0000',
+      //       //       fillOpacity: 0.35,
+      //       //       map: map,
+      //       //       center: new google.maps.LatLng(mData[city].city.center),
+      //       //       radius: 80000
+      //       //     });
+      //       // }
+      //       }
+      //   })

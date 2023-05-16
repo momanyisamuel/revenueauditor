@@ -1,7 +1,16 @@
-logs/*
-!.gitkeep
-node_modules/
-bower_components/
+
+# System files
+*.log
+.DS_Store
+bower_components
 tmp
 .DS_Store
 .idea
+
+# Visual Studio Code
+.vscode/*
+!.vscode/extensions.json
+
+
+# Node dependencies
+node_modules
