@@ -9,7 +9,7 @@
 	//out.println(0);
 try{
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		con =DriverManager.getConnection("jdbc:sqlserver://yauro.co.za;user=allied;password=w384cc355");
+		con =DriverManager.getConnection("");
 		stmt=con.createStatement();
 
 		if(request.getParameter("node").toString().equals("selectnoninterestincomedate")){
